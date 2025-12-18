@@ -4,11 +4,11 @@ A physics-driven Pygame challenge featuring dynamic weather, multiple bikes, and
 
 ## 🕹️ Live Demo
 
-[Click here to play in your browser!](YOUR_GITHUB_PAGES_LINK)
+[Click here to play in your browser!](https://github.com/diaba/extreme-bike-balance)
 
 ## 🛠️ Installation (Local Play)
 
-1. Clone the repo: `git clone https://github.com/your-username/your-repo.git`
+1. Clone the repo: `git clone https://github.com/diaba/extreme-bike-balance.git`
 2. Install Pygame: `pip install pygame`
 3. Run: `python main.py`
 
