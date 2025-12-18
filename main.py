@@ -149,9 +149,9 @@ BG_THEMES = {
 }
 
 BIKE_CONFIGS = {
-    "1": {"name": "Agile Scout", "grav": 0.0012, "lean": 0.12, "speed": 0.9, "color": (100, 255, 100), "img": "bike1.png"},
-    "2": {"name": "Balanced Pro", "grav": 0.0022, "lean": 0.08, "speed": 1.1, "color": (100, 180, 255), "img": "bike2.png"},
-    "3": {"name": "Heavy Beast",  "grav": 0.0038, "lean": 0.05, "speed": 1.5, "color": (255, 80, 80), "img": "bike3.jpg"}
+    "1": {"name": "Agile Scout", "grav": 0.0012, "lean": 0.12, "speed": 0.9, "color": (100, 255, 100), "img": "./assets/bike1.png"},
+    "2": {"name": "Balanced Pro", "grav": 0.0022, "lean": 0.08, "speed": 1.1, "color": (100, 180, 255), "img": "./assets/bike2.png"},
+    "3": {"name": "Heavy Beast",  "grav": 0.0038, "lean": 0.05, "speed": 1.5, "color": (255, 80, 80), "img": "./assets/bike3.jpg"}
 }
 
 # --- 2. WEATHER SYSTEM (Same as before) ---
