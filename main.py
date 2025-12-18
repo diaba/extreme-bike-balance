@@ -1,140 +1,28 @@
-# 1. Project Setup & Assets
-
-#     Images: You will need two main images: a Background(background.jpg) and a Bike (with the rider). Ensure the bike image(bike.jpg) has a transparent background (PNG).
-
-#     Coordinate System: The bike should stay centered horizontally (x-axis) while the background scrolls to simulate movement, or stay stationary if the focus is purely on balancing.
-
-# 2. Physics Variables
-
-# You need to track the "tilt" of the bike. Define these variables in your code:
-
-#     angle: The current rotation of the bike (starting at 0).
-
-#     angular_velocity: How fast the bike is currently tipping.
-
-#     gravity_pull: A constant that increases the angular_velocity based on how far the bike is already tilted.
-
-#     lean_speed: How much the W and S keys affect the rotation.
-
-# 3. The Core Game Logic
-
-# To make the balancing feel "real," use this logic loop:
-
-#     Gravity Effect: If the bike is tilted even slightly, gravity should pull it further in 그 direction.
-
-#         angular_velocity+=angle×gravity_strength
-
-#     User Input: * Press W: Decrease angular_velocity (Lean Back).
-
-#         Press S: Increase angular_velocity (Lean Forward).
-
-#     Update Rotation: Apply the velocity to the angle.
-
-#         angle+=angular_velocity
-
-#     Collision Check: If angle exceeds a certain limit (e.g., +90 or -90 degrees), the bike crashes and the game ends.
-
-# 4. Score Tracking
-
-#     Current Score: Increment a timer or a distance counter every frame that the bike hasn't crashed.
-
-#     High Score: Compare the current_score to a high_score variable saved in a local file or browser storage.
-# 5. Game Over & Restart
-#     When the bike crashes, display a "Game Over" message along with the current score and high score.
-# import pygame
-# import sys
-# import os
-# import math 
-# import pickle
-# from pygame.locals import *
-# pygame.init()
-# # Screen dimensions
-# WIDTH, HEIGHT = 800, 600
-# screen = pygame.display.set_mode((WIDTH, HEIGHT))
-# pygame.display.set_caption("Bike Balancing Game")   
-# clock = pygame.time.Clock()
-# # Load images
-# background = pygame.image.load("bck.jpg")
-# bike = pygame.image.load("bk.jpg")
-# # resize bike image to 70%
-# bike = pygame.transform.scale(bike, (int(bike.get_width() * 0.9), int(bike.get_height() * 0.9)))
-# bike_rect = bike.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 100))
-# # Physics variables
-# angle = 0
-# angular_velocity = 0
-# gravity_pull = 0.001
-# lean_speed = 0.05
-# # Score tracking
-# current_score = 0
-# high_score = 0
-# # Load high score from file
-# if os.path.exists("highscore.pkl"):
-#     with open("highscore.pkl", "rb") as f:
-#         high_score = pickle.load(f)
-# # change color of font to Blue and size to 36
-# font = pygame.font.SysFont("Arial", 36)
-# # Game loop
-# game_over = False
-# def reset_game():
-#     global angle, angular_velocity, current_score, game_over
-#     angle = 0
-#     angular_velocity = 0
-#     current_score = 0
-#     game_over = False
-# while True:
-#     for event in pygame.event.get():
-#         if event.type == QUIT:
-#             with open("highscore.pkl", "wb") as f:
-#                 pickle.dump(high_score, f)
-#             pygame.quit()
-#             sys.exit()
-#     keys = pygame.key.get_pressed()
-#     if not game_over:
-#         # Gravity effect
-#         angular_velocity += angle * gravity_pull
-#         # User input
-#         if keys[K_w]:
-#             angular_velocity -= lean_speed
-#         if keys[K_s]:
-#             angular_velocity += lean_speed
-#         # Update rotation
-#         angle += angular_velocity
-#         # Collision check
-#         if abs(angle) > 90:
-#             game_over = True
-#             if current_score > high_score:
-#                 high_score = current_score
-#         else:
-#             current_score += 1
-#     else:
-#         if keys[K_r]:
-#             reset_game()
-#     # Draw background
-#     screen.blit(background, (255, 0))
-#     # Rotate and draw bike
-#     rotated_bike = pygame.transform.rotate(bike, -angle)
-#     rotated_rect = rotated_bike.get_rect(center=bike_rect.center)
-#     screen.blit(rotated_bike, rotated_rect.topleft)
-#     # Draw scores
-#     score_text = font.render(f"Score: {current_score}", True, (255, 255, 255))
-#     high_score_text = font.render(f"High Score: {high_score}", True, (255, 255, 255))
-#     screen.blit(score_text, (10, 10))
-#     screen.blit(high_score_text, (10, 50))
-#     # Game over message
-#     if game_over:
-#         game_over_text = font.render("Game Over! Press R to Restart", True, (255, 0, 0))
-#         screen.blit(game_over_text, (WIDTH // 2 - game_over_text.get_width() // 2, HEIGHT // 2))
-#     pygame.display.flip()
-#     clock.tick(60)
-
-
-
 import pygame
 import sys
 import os
 import random
 import pickle
 from pygame.locals import *
+
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+# Example Usage in your Bike class:
+# path = resource_path("assets/bike1.png")
+# img = pygame.image.load(path).convert_alpha()
+
+
+
+
 
 # --- 1. GLOBAL CONFIGURATION ---
 WIDTH, HEIGHT = 800, 600
