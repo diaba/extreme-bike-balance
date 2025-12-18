@@ -1,48 +1,50 @@
-# Bike Balance Game: Development Guide
+# AI Developer Instructions: Extreme Bike Balance Engine
 
-Follow these instructions to program a physics-based bike balancing game.
+You are a Python Game Development expert. Use these instructions to maintain, debug, or extend the provided Pygame source code.
 
----
+## 1. Core Architecture
 
-## 1. Project Setup & Assets
-* **Images:** * `background.png`: A wide image for the environment.
-    * `bike.png`: The player character (use a transparent PNG).
-* **Coordinate System:** * Keep the bike centered on the $x$-axis.
-    * (Optional) Scroll the background to simulate forward motion.
+The game follows a **State-Driven Object-Oriented** pattern.
 
-## 2. Physics Variables
-Initialize these variables at the start of your script:
+- **States**: `MENU`, `PLAYING`, `GAMEOVER`.
+- **Primary Classes**:
+  - `Game`: Controls the main loop, state transitions, and UI.
+  - `Bike`: Encapsulates physics, visual scaling, and nitro fuel.
+  - `Background`: Handles infinite parallax scrolling.
 
-| Variable | Purpose |
-| :--- | :--- |
-| `angle` | The current rotation of the bike (starts at 0). |
-| `angular_velocity` | The speed at which the bike is tilting. |
-| `gravity_pull` | A constant that pulls the bike down faster as the angle increases. |
-| `lean_speed` | The power of the player's input (W/S keys). |
+## 2. Physics & Balance Logic
 
----
+The balance mechanic uses an angular velocity formula influenced by gravity and user input:
 
-## 3. The Core Game Logic
-To create realistic balancing, run the following logic inside your main game loop:
+- **Gravity Scaling**: $G_{current} = G_{base} + (Score / 45000)$.
+- **Angular Velocity**: $\omega_{t+1} = \omega_t + (\theta \cdot G) + Wind$.
+- **Stabilization**: Boosting (holding SPACE) reduces the gravity multiplier by 40%, making the bike easier to balance at high speeds.
 
-### Gravity Calculation
-Gravity is non-linear; the further the bike tilts, the harder it falls.
-$$angular\_velocity += angle \times gravity\_strength$$
+## 3. Bike Configuration Data
 
-### Input Handling
-* **Press W:** Lean Back (Decrease `angular_velocity`).
-* **Press S:** Lean Forward (Increase `angular_velocity`).
+Bikes are defined in a dictionary `BIKE_CONFIGS`. When adding new bikes, follow this schema:
 
-### Rotation Update
-Apply the calculated velocity to the current angle:
-$$angle += angular\_velocity$$
+- `grav`: Base falling speed (Stability).
+- `lean`: How responsive the W/S keys are (Handling).
+- `speed`: Multiplier for score and background scroll.
+- `img`: Filename for the sprite.
 
-### Win/Loss Condition
-* **Collision:** If `angle` > 90° or `angle` < -90°, trigger a **Game Over**.
+## 4. UI & High Score System
 
----
+- **Persistence**: High scores are stored in `record.pkl` using the `pickle` module.
+- **Scaling**: All visual scores are displayed as `Score // 10` to represent meters.
+- **HUD**: Includes a real-time "Best Score" tracker that updates the moment the player surpasses the previous record.
 
-## 4. Score Tracking
-* **Current Score:** Increment a counter for every second the player remains upright.
-* **High Score:** * At Game Over, check if `current_score` > `high_score`.
-    * Save the new `high_score` to local storage or a `.txt` file.
+## 5. Asset Requirements
+
+The engine expects the following assets in the root directory:
+
+1. `bg.png`: Infinite scroll background (Min 800px width).
+2. `bike1.png`, `bike2.png`, `bike3.png`: Transparent PNG sprites.
+3. `record.pkl`: Automatically generated on first wipeout.
+
+## 6. Extension Guidelines
+
+- **To add Obstacles**: Create an `Obstacle` class and a list in `Game`. Check for collisions using `bike.rect.colliderect()`.
+- **To add Visuals**: Insert particle emission calls in the `PLAYING` state loop.
+- **To add Levels**: Create a `LevelManager` that swaps `bg.png` based on `score` milestones.

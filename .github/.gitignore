@@ -1,0 +1,25 @@
+# Python Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local Save Data / Records
+# We ignore these so your personal high score doesn't overwrite others
+record.pkl
+hs.pkl
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Large Assets (Optional)
+# If you have very large PSD or backup image files
+*.psd
+*.bak
