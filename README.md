@@ -1,15 +1,19 @@
-# Extreme Bike Balance 🏍️
+# 🏍️ Extreme Bike Balance
 
-A physics-based balancing game built with Pygame.
+A physics-driven Pygame challenge featuring dynamic weather, multiple bikes, and customizable themes.
 
-## How to Play
+## 🕹️ Live Demo
 
-1. Install Python 3.x
-2. Install requirements: `pip install -r requirements.txt`
-3. Run the game: `python main.py`
+[Click here to play in your browser!](YOUR_GITHUB_PAGES_LINK)
 
-## Controls
+## 🛠️ Installation (Local Play)
+
+1. Clone the repo: `git clone https://github.com/your-username/your-repo.git`
+2. Install Pygame: `pip install pygame`
+3. Run: `python main.py`
+
+## 🎮 Controls
 
 - **W / S**: Lean Bike
 - **Space**: Nitro Boost
-- **K / L / G**: Change Theme
+- **K / L / G**: Change Theme (Black, White, Green)
