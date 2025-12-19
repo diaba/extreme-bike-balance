@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xtreme Balance 2025: Sound & Fury</title>
+
+    <!-- External Frameworks: Bootstrap for Modern UI components -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Link to your consolidated game styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-dark text-white">
+
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+
+        <div id="ui-layer" class="overlay">
+            <div class="glass-panel text-center p-5">
+                <h1 class="display-3 fw-bold text-warning mb-4">XTREME BALANCE</h1>
+
+                <div id="menu-screen">
+                    <p class="lead mb-4">Select Your Machine</p>
+                    <div class="row g-3 justify-content-center" id="bike-selection"></div>
+
+                    <!-- NEW: Custom Audio Selector -->
+                    <!-- <div class="mt-4 p-3 border border-secondary rounded bg-dark">
+                        <label class="form-label d-block small opacity-75">UPLOAD YOUR OWN SOUNDTRACK (MP3)</label>
+                        <input type="file" id="audio-upload"
+                            class="form-control form-control-sm bg-dark text-white border-secondary"
+                            accept="audio/mp3,audio/wav">
+                    </div> -->
+
+                    <p class="mt-4 small opacity-50">W/S to Lean | SPACE for Nitro | [R] to Reset</p>
+                </div>
+
+                <div id="gameover-screen" class="d-none">
+                    <h2 class="text-danger display-1 fw-black">WIPEOUT</h2>
+                    <h3 id="final-stats" class="mb-4"></h3>
+                    <button class="btn btn-warning btn-lg rounded-pill" onclick="location.reload()">RETRY [R]</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="hud" class="d-none">
+            <div class="stat-box top-center">
+                <button id="music-toggle" class="btn btn-outline-info btn-sm rounded-pill px-3">🎵 MUSIC: OFF</button>
+            </div>
+            <div class="stat-box top-left"><small>DISTANCE</small>
+                <div id="dist-ui" class="h1">0</div>
+            </div>
+            <div class="stat-box top-right text-end"><small>NITRO</small>
+                <div class="progress bg-dark border border-secondary mt-1" style="width: 150px; height: 10px;">
+                    <div id="nitro-fill" class="progress-bar bg-info" style="width: 100%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden audio element for the custom soundtrack -->
+    <audio id="game-music" src="./assets/sound1.mp3" loop></audio>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
